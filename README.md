@@ -1,1 +1,1 @@
-# it302-gbj3-project
+# it302-gbj3-project repo
