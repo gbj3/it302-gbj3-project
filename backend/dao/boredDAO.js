@@ -1,5 +1,7 @@
 //gbj3 2/28 it302-002 phase2 gbj3@njit.edu
 let bored
+import mongodb from "mongodb";
+const ObjectId = mongodb.ObjectId;
 
 export default class BoredDAO {
   static async injectDB(conn) {
@@ -11,7 +13,41 @@ export default class BoredDAO {
       console.error(`unable to connect in BoredDAO: ${e}`)
     }
   }
-  
+  static async getTypes() { 
+    let types = []
+    try {
+      types = await bored.distinct("type")
+      return types
+    } catch(e) {
+      console.error(`unable to get types, ${e}`)
+      return types
+    }
+  }
+
+  static async getActivityById(id) {
+    try {
+      return await bored.aggregate([
+        {
+          $match: {
+            _id: new ObjectId(id),
+          }
+        },
+        { $lookup:
+          {
+            from: 'feedback',
+            localField: '_id',
+            foreignField: 'activity_id',
+            as: 'feedback'
+          }
+        }
+      ]).next()
+    }
+    catch(e) {
+      console.error(`something went wrong in getActivityById: ${e}`)
+      throw e
+    }
+  }
+
   static async getActivities({
     filters = null,
     page = 0,
@@ -38,23 +74,6 @@ export default class BoredDAO {
       console.error(`Unable to issue find command, ${e}`)
       console.error(e)
       return { activitiesList: [], totalNumActivities: 0 }
-    }
-  }
-
-  static async addActivity(activity, type, participants, price, lastModified) {
-    try {
-      const activityDoc = {
-        activity: activity,
-        type: type,
-        participants: participants,
-        price: price,
-        lastModified: lastModified,
-      }
-      return await bored.insertOne(activityDoc)
-    } catch(e) {
-      console.error(`unable to post activity: ${e}`)
-      console.error(e)
-      return { error: e }
     }
   }
 }

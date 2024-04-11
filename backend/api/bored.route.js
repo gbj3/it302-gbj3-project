@@ -8,8 +8,9 @@ const router = express.Router()
 
 router.route('/').get(BoredController.apiGetActivities)
 
-router.route('/activity')
-.post(BoredController.apiPostActivity)
+router.route("/types").get(BoredController.apiGetTypes)
+
+router.route("/id/:id").get(BoredController.apiGetActivityById)
 
 router.route("/feedback")
 .post(FeedbackController.apiPostFeedback)
