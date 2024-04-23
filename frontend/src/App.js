@@ -52,7 +52,7 @@ function App() {
           element={<AddFeedback user={user} />}
       ></Route>
 
-        <Route path="/login" element={<Login user={user} loginSetter={loginSetter} />}></Route>
+        <Route path="/gbj3_login" element={<Login user={user} loginSetter={loginSetter} />}></Route>
       </Routes>
 
     </div>
