@@ -34,7 +34,7 @@ function App() {
         <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
             <Nav.Link as={NavLink} to={"/gbj3_activities"}>Activities</Nav.Link>
-            <Nav.Link as={NavLink} to={user ? "" : "/login"}>
+            <Nav.Link as={NavLink} to={user ? "" : "/gbj3_login"}>
                   {user ? "Logout User" : "Login"}
             </Nav.Link>
           </Nav>
