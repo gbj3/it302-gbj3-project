@@ -34,10 +34,10 @@ export default class BoredDAO {
         },
         { $lookup:
           {
-            from: 'feedback',
+            from: 'feedbacks',
             localField: '_id',
             foreignField: 'activity_id',
-            as: 'feedback'
+            as: 'feedbacks'
           }
         }
       ]).next()

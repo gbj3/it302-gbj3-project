@@ -1,4 +1,4 @@
-//gbj3 4/11 it302-002 phase4 gbj3@njit.edu
+//gbj3 4/22 it302-002 phase5 gbj3@njit.edu
 import './App.css';
 import React, { useState, useCallback } from "react";
 import { Routes, Route, NavLink } from "react-router-dom";
@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ActivityList from "./components/activityList";
 import Activity from "./components/activity";
 import Login from "./components/login";
-import AddFeeback from "./components/addFeedback";
+import AddFeedback from "./components/addFeedback";
 
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -46,6 +46,11 @@ function App() {
         <Route path="/gbj3_activities" element={<ActivityList />}></Route>
 
         <Route path="/gbj3_activities/:id" element={<Activity user={user} />}></Route>
+
+        <Route
+          path="/gbj3_activities/:id/feedback"
+          element={<AddFeedback user={user} />}
+      ></Route>
 
         <Route path="/login" element={<Login user={user} loginSetter={loginSetter} />}></Route>
       </Routes>
